@@ -25,7 +25,6 @@ function guardian() {
 				pass: result(true),
 				fail: result(false),
 				detail: tests.reduce(function (t, i) {
-					console.log(t, i);
 					return i.detail ? t.push(i.detail) && t : t;
 				}, [])
 			};
