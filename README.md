@@ -14,6 +14,7 @@ $ npm install guardianjs
 
 ```js
 var guardian = require('guardianjs');
+
 var guard = guardian();
 
 guard.assure(true);
@@ -26,6 +27,7 @@ Or give a duty to be performed in the event of failure.  Anything returned is ad
 
 ```js
 var guardian = require('guardianjs');
+
 var guard = guardian().duty(function(data) {
 	return data.join(' ');
 });
