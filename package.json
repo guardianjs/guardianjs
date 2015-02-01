@@ -1,5 +1,5 @@
 {
-	"name": "guardian",
+	"name": "guardianjs",
 	"version": "0.0.0",
 	"description": "Unopinionated JavaScript testing micro-framework",
 	"main": "index.js",
