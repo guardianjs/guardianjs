@@ -8,7 +8,7 @@
 	var guard = guardian();
 	var assure = guard.assure.bind(guard);
 
-	guard.duty(function (result, data) {
+	guard.duty(function (data) {
 		var message = "assurance failure";
 		if (data) {
 			message = data.map(function (i) {
@@ -27,7 +27,7 @@
 		.report();
 
 	assure(result.pass === 3, 'Correct number of passes in result:', result);
-	assure(result.fail === 2, 'Correct number of failures in result:', result);
+	assure(result.fail === 1, 'Correct number of failures in result:', result);
 
 	var r = guard.report();
 	console.log('Results: ', r.pass, 'passed', r.fail, 'failed');

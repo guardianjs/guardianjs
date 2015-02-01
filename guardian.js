@@ -21,7 +21,7 @@ function guardian() {
 			};
 
 			var note;
-			if (!test && (note = dutyCall(test, args))) {
+			if (!test && (note = dutyCall(args))) {
 				result.note = note;
 			}
 			tests.push(result);
