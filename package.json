@@ -1,0 +1,14 @@
+{
+	"name": "guardianjs",
+	"version": "0.0.0",
+	"description": "Easiest config-less JavaScript testing micro-framework",
+	"main": "index.js",
+	"scripts": {
+		"test": "node test.js"
+	},
+	"author": "Bryant Syme",
+	"license": "MIT",
+	"devDependencies": {
+		"prettify-error": "^0.1.1"
+	}
+}
