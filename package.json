@@ -1,7 +1,7 @@
 {
-	"name": "guardianjs",
+	"name": "guardian",
 	"version": "0.0.0",
-	"description": "Easiest config-less JavaScript testing micro-framework",
+	"description": "Unopinionated JavaScript testing micro-framework",
 	"main": "index.js",
 	"scripts": {
 		"test": "node test.js"

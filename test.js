@@ -5,18 +5,29 @@
 	var prettify = require('prettify-error');
 	var guardian = require('./guardian');
 
-	var guard = guardian().duty(function (result) {
-		console.error(prettify(new Error("Failed!!!!!"), 2));
+	var guard = guardian();
+	var assure = guard.assure.bind(guard);
+
+	guard.duty(function (result, data) {
+		var message = "assurance failure";
+		if (data) {
+			message = data.map(function (i) {
+				return typeof i === 'object' ? JSON.stringify(i) : i;
+			}).join(' ');
+		}
+		console.error(prettify(new Error("Security Alert: " + message), 2));
 	});
 
-	var resultOfSinglePassingAssert = guardian().assure(true).report();
+	var result = guardian()
+		.assure(false)
+		.assure(false)
+		.assure(true)
+		.assure(true)
+		.assure(true)
+		.report();
 
-	guard.assure(resultOfSinglePassingAssert.pass === 1);
-	guard.assure(resultOfSinglePassingAssert.fail === 0);
-
-	var resultOfSingleFailingAssert = guardian().assure(false).report();
-	guard.assure(resultOfSingleFailingAssert.pass === 0);
-	guard.assure(resultOfSingleFailingAssert.fail === 1);
+	assure(result.pass === 3, 'Correct number of passes in result:', result);
+	assure(result.fail === 2, 'Correct number of failures in result:', result);
 
 	var r = guard.report();
 	console.log('Results: ', r.pass, 'passed', r.fail, 'failed');
