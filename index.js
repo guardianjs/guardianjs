@@ -1,1 +1,1 @@
-module.exports = require('guardian');
+module.exports = require('./guardian');
