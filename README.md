@@ -20,7 +20,8 @@ var guard = guardian();
 guard.assure(true);
 guard.assure(false);
 
-console.log(guard.report()); // output: { pass: 1, fail: 1, notes: [] }
+console.log(guard.report()); 
+// console output: { pass: 1, fail: 1, notes: [] }
 ```
 
 Or give a duty to be performed in the event of failure.  Anything returned is added to the notes.
@@ -35,5 +36,6 @@ var guard = guardian().duty(function(data) {
 guard.assure(true);
 guard.assure(false, 'how could false fail!?', 5);
 
-console.log(guard.report()); // output: { pass: 1, fail: 1, notes: ['how could false fail!? 5'] }
+console.log(guard.report()); 
+// console output: { pass: 1, fail: 1, notes: ['how could false fail!? 5'] }
 ```
