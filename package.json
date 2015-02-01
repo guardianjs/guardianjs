@@ -6,7 +6,19 @@
 	"scripts": {
 		"test": "node test.js"
 	},
-	"author": "Bryant Syme",
+	"author": {
+		"name": "bryzaguy"
+	},
+	"keywords": [
+		"unit",
+		"testing",
+		"tests",
+		"micro"
+	],
+	"repository": {
+		"url": "git@github.com:guardianjs/guardianjs.git",
+		"type": "git"
+	},
 	"license": "MIT",
 	"devDependencies": {
 		"prettify-error": "^0.1.1"
