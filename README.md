@@ -1,6 +1,6 @@
 ## guardianjs
 
-guardianjs is an unopinionated JavaScript testing micro-framework.  There is no configuration necessary.  There are no wierd conventions.  Just require and add tests.
+guardianjs is an unopinionated JavaScript testing micro-framework.  There is no configuration necessary.  There are no weird conventions.  Just require and add tests.
 
 ![](http://cdn.meme.am/instances/54336539.jpg)
 
