@@ -1,26 +1,26 @@
 {
-	"name": "guardianjs",
-	"version": "0.0.0",
-	"description": "Unopinionated JavaScript testing micro-framework",
-	"main": "index.js",
-	"scripts": {
-		"test": "node test.js"
-	},
-	"author": {
-		"name": "bryzaguy"
-	},
-	"keywords": [
-		"unit",
-		"testing",
-		"tests",
-		"micro"
-	],
-	"repository": {
-		"url": "git@github.com:guardianjs/guardianjs.git",
-		"type": "git"
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"prettify-error": "^0.1.1"
-	}
+  "name": "guardianjs",
+  "version": "0.0.1",
+  "description": "Unopinionated JavaScript testing micro-framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": {
+    "name": "bryzaguy"
+  },
+  "keywords": [
+    "unit",
+    "testing",
+    "tests",
+    "micro"
+  ],
+  "repository": {
+    "url": "git@github.com:guardianjs/guardianjs.git",
+    "type": "git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "prettify-error": "^0.1.1"
+  }
 }
