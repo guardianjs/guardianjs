@@ -21,6 +21,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "prettify-error": "^0.1.1"
+    "failing-code": "^0.1.0",
+    "format-text": "0.0.3",
+    "gulp": "^3.8.10",
+    "gulp-jshint": "^1.9.2",
+    "jshint": "^2.6.0",
+    "left-pad": "0.0.3",
+    "style-format": "0.0.0"
   }
 }
