@@ -4,7 +4,8 @@
   "description": "Unopinionated JavaScript testing micro-framework",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "watch": "node ./node_modules/onchange './*.js' -- npm test"
   },
   "author": {
     "name": "bryzaguy"

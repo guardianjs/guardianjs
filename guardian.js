@@ -1,7 +1,7 @@
-function guardian() {
+function guardian(tests) {
 	'use strict';
-	var tests = [];
-	var dutyCall = function () {};
+	tests = tests || [];
+	var dutyCall = function (data) {};
 
 	function result(pass) {
 		return tests.filter(function (i) {
@@ -21,7 +21,7 @@ function guardian() {
 			};
 
 			var note;
-			if (!test && (note = dutyCall(args))) {
+			if (!test && (note = dutyCall.call(null, args))) {
 				result.note = note;
 			}
 			tests.push(result);
