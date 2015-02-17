@@ -1,71 +1,48 @@
-/* global console, require, module  */
 (function () {
 	'use strict';
 
-	var style = require("style-format");
-	var guardian = require('./guardian');
-	var failingCode = require('failing-code');
-	var util = require('util');
-	var format = require('util').format;
-	var template = style('\nTest results: {green}%d{reset} Passed {red}%d{reset} Failed\r');
-	var guard = guardian();
-	var assure = guard.assure;
-	var charm = require('charm');
-	var color = require('color');
-	var expect = require('./jasmineExpect');
-
-	guard.duty(function Facts(data) {
-		var r = format(template, guard.report().pass, guard.report().fail);
-		var message = format.apply(null, data) || "Assurance Failure";
-		console.log(failingCode(new Error(message), undefined, 2)[1].code);
-		process.stderr.write(message);
-		return message;
-	});
-
-	function pass() {
-		return {
-			result: true
+	var guardian = require('./guardian'), 
+		Test = guardian.Test, 
+		bruteTest = function (result, messages) {
+			if (!result) throw new Error(messages.join(' '));
 		};
-	}
 
-	function fail() {
-		return {
-			result: false
-		};
-	}
+	(function makeAnApplePie() {
+		var name = "Guardian:";
+		var tests = [], guard = guardian(tests), given = guard.expect("universe");
+	
+		bruteTest(guard.tests === tests, [name, "holds onto tests"]);
+		bruteTest(tests[0] === given, [name, "expecting creates test"]);
+		bruteTest(given instanceof Test, [name, "test is type of Test"]);
+		bruteTest(given.actual === "universe", [name, "test holds given value."]);
 
-	(function verifyGuardReport() {
-		var result = guardian([pass(), pass(), fail()])
-			.report();
+		var passResult = given.toBe("universe");
+		name = "Expect: (passing test)";
+		bruteTest(passResult.pass === true, [name, "pass is true."]);
+		bruteTest(passResult.message === undefined, [name, "has no message"]);
 
-		var report = JSON.stringify(guardian().report());
-		assure(report === '{"pass":0,"fail":0,"notes":[]}', report);
-		assure(result.pass === 2, 'Expected 3 but got:', result.pass);
-		assure(result.fail === 1, 'Expected 2 but got:', result.fail);
-		assure(JSON.stringify(
-			result.notes) === '[]');
+		var failResult = given.toBe("applepie");
+		name = "Expect: (failing test)";
+		bruteTest(failResult.pass === false, [name, "pass is false."]);
+		bruteTest(failResult.message === "Expected universe to be applepie", 
+			[name, "has message."]);
 	}());
 
-	(function guard() {
-		var result = guardian().duty(function () {
-			return 'woah';
-		}).assure(false, '1').report();
+	(function canReportBasicResults() {
+		var name = "Guard Report:";
+		var tests = [new Test(true), new Test(false, "t1"), new Test(false, "t2")],
+			result = guardian(tests).report();
 
-		assure(JSON.stringify(result.notes) == '["woah"]');
+		bruteTest(result.pass === 1, [name, "Has one passing tests."]);
+		bruteTest(result.fail === 2, [name, "Has two failing tests."]);
+		bruteTest(result.messages[0] === "t1", [name, "Has first failed message"]);
+		bruteTest(result.messages[1] === "t2", [name, "Has second failed message"]);
 	}());
 
-	(function verifyGuardNotes() {
-		var result = guardian().duty(function (data) {
-			return data[0];
-		}).assure(false, '1').report();
+	(function ohNoChainedTests() {
+		var tests = [], expect = guardian(tests).expect;
 
-		assure(JSON.stringify(result.notes) == '["1"]', result.notes);
 	}());
 
-	assure(expect([]).toBeArray(), 'woah');
-
-
-	var r = format(template, guard.report().pass, guard.report().fail);
-	process.stdout.write(r);
-	module.exports = guard.report();
+	console.log('pass:', new Date());
 }());

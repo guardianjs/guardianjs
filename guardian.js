@@ -1,42 +1,37 @@
 function guardian(tests) {
 	'use strict';
+
 	tests = tests || [];
-	var dutyCall = function (data) {};
-
-	function result(pass) {
-		return tests.filter(function (i) {
-			return pass === i.result;
-		}).length;
-	}
-
-	return {
-		duty: function (cb) {
-			dutyCall = cb;
-			return this;
-		},
-		assure: function (test) {
-			var args = Array.prototype.splice.call(arguments, 1);
-			var result = {
-				result: test
-			};
-
-			var note;
-			if (!test && (note = dutyCall.call(null, args))) {
-				result.note = note;
-			}
-			tests.push(result);
-			return this;
-		},
-		report: function () {
-			return {
-				pass: result(true),
-				fail: result(false),
-				notes: tests.reduce(function (t, i) {
-					return i.note ? t.push(i.note) && t : t;
-				}, [])
-			};
-		}
+	var guard = {};
+	guard.tests = tests;
+	guard.expect = function (actual) {
+		var result = new guardian.Test();
+		result.actual = actual;
+		tests.push(result);
+		return result;
 	};
+	guard.report = function () {
+		return tests.reduce(function(p, i) {
+			var r = i.pass ? "pass" : p.messages.push(i.message) && "fail";
+			p[r] += 1;
+			return p;
+		}, {pass: 0, fail: 0, messages: []});
+	};
+
+	return guard;
 }
+
+guardian.Test = function(result, message) {
+	this.pass = result;
+	this.message = message;
+};
+
+guardian.Test.prototype.toBe = function (expected) {
+	this.pass = this.actual === expected;
+	if (!this.pass) {
+		this.message = "Expected " + this.actual + " to be " + expected;
+	}
+	return this;
+};
 
 module.exports = guardian;
