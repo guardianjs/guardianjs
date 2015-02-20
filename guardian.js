@@ -11,19 +11,22 @@ function guardian(tests) {
 		return result;
 	};
 	guard.report = function () {
-		return tests.reduce(function(p, i) {
-			var r = i.pass ? "pass" : p.messages.push(i.message) && "fail";
+		return tests.reduce(function (p, i) {
+			var r = i.pass ? "pass" : "fail";
 			p[r] += 1;
 			return p;
-		}, {pass: 0, fail: 0, messages: []});
+		}, {
+			pass: 0,
+			fail: 0,
+			messages: []
+		});
 	};
 
 	return guard;
 }
 
-guardian.Test = function(result, message) {
+guardian.Test = function (result) {
 	this.pass = result;
-	this.message = message;
 };
 
 guardian.Test.prototype.toBe = function (expected) {
