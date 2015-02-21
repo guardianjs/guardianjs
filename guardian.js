@@ -1,40 +1,25 @@
-function guardian(tests) {
-	'use strict';
+#!/usr/bin/env node
 
-	tests = tests || [];
-	var guard = {};
-	guard.tests = tests;
-	guard.expect = function (actual) {
-		var result = new guardian.Test();
-		result.actual = actual;
-		tests.push(result);
-		return result;
-	};
-	guard.report = function () {
-		return tests.reduce(function (p, i) {
-			var r = i.pass ? "pass" : "fail";
-			p[r] += 1;
-			return p;
-		}, {
-			pass: 0,
-			fail: 0,
-			messages: []
-		});
-	};
+'use strict';
 
-	return guard;
+function Test(name, tests) {
+	this.name = name;
+	this.result = function (pass) {
+		this.pass = pass;
+		tests.push(this);
+		return this;
+	};
 }
 
-guardian.Test = function (result) {
-	this.pass = result;
-};
+function guardian(tests) {
+	tests = tests || [];
+	return {
+		test: function (name) {
+			return new Test(name, tests);
+		}
+	};
+}
 
-guardian.Test.prototype.toBe = function (expected) {
-	this.pass = this.actual === expected;
-	if (!this.pass) {
-		this.message = "Expected " + this.actual + " to be " + expected;
-	}
-	return this;
-};
+guardian.Test = Test;
 
 module.exports = guardian;
