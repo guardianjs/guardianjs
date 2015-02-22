@@ -1,6 +1,15 @@
 var guardian = require('./guardian');
 var basicTests = require('./basicTests');
+//var reportingTests = require('./reportingTests');
 
-basicTests(guardian);
+var results = basicTests(guardian);
 
-console.log('pass:', new Date());
+
+function getFailures(fails, test) {
+	return results[test] ? fails : "Failure: " + fails + '\n' + test;
+}
+
+var failures = Object.keys(results).reduce(getFailures, '');
+if (failures) throw new Error(failures);
+
+console.log('Tests executed on: ', new Date());

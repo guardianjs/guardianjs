@@ -1,12 +1,12 @@
 module.exports = function (guardian) {
 	'use strict';
 
-	var tests, guard,
-		test = (guard = guardian(tests = [])).test(),
-		passing = test.result(true),
-		failing = test.result(false);
+	var tests,
+		test = guardian(tests = []),
+		passing = test.assert(true),
+		failing = test.assert(false);
 
-	var results = {
+	return {
 		'Create universe, then pie.': test instanceof guardian.Test,
 		'Passing result is test.': passing instanceof guardian.Test,
 		'Failing result is test.': failing instanceof guardian.Test,
@@ -16,11 +16,4 @@ module.exports = function (guardian) {
 		'Tests has passing test.': passing === tests[0],
 		'Tests has failing test.': failing === tests[1],
 	};
-
-	function getFailures(fails, test) {
-		return results[test] ? fails : "Failure: " + fails + '\n' + test;
-	}
-
-	var failures = Object.keys(results).reduce(getFailures, '');
-	if (failures) throw new Error(failures);
 };

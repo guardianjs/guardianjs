@@ -2,27 +2,23 @@
 
 'use strict';
 
-function Test(tests) {}
+function Test() {}
 
 function guardian(tests) {
 	tests = tests || [];
-	return {
-		test: function () {
-			return Object.create(Test.prototype, {
-				result: {
-					value: function (pass) {
-						var result = Object.create(this, {
-							pass: {
-								value: pass
-							}
-						});
-						tests.push(result);
-						return result;
+	return Object.create(Test.prototype, {
+		assert: {
+			value: function (pass) {
+				var result = Object.create(this, {
+					pass: {
+						value: pass
 					}
-				}
-			});
+				});
+				tests.push(result);
+				return result;
+			}
 		}
-	};
+	});
 }
 
 guardian.Test = Test;
