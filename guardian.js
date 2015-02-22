@@ -2,20 +2,25 @@
 
 'use strict';
 
-function Test(name, tests) {
-	this.name = name;
-	this.result = function (pass) {
-		this.pass = pass;
-		tests.push(this);
-		return this;
-	};
-}
+function Test(tests) {}
 
 function guardian(tests) {
 	tests = tests || [];
 	return {
-		test: function (name) {
-			return new Test(name, tests);
+		test: function () {
+			return Object.create(Test.prototype, {
+				result: {
+					value: function (pass) {
+						var result = Object.create(this, {
+							pass: {
+								value: pass
+							}
+						});
+						tests.push(result);
+						return result;
+					}
+				}
+			});
 		}
 	};
 }

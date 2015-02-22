@@ -1,4 +1,6 @@
+var guardian = require('./guardian');
 var basicTests = require('./basicTests');
 
-basicTests();
+basicTests(guardian);
+
 console.log('pass:', new Date());
