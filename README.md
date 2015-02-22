@@ -12,7 +12,7 @@ $ npm install guardianjs
 
 ## Usage
 
-Ask guardian for a guard to keep watch over your code.  Tell them what things they need to assert remain truthy.  Ask them at any time for a full report.  If there are any failures you can ask for more specifics.
+Ask guardian for a guard to keep watch over your code.  Tell them what things they need to assert are truthy.  Ask them at any time for a full report.  If there are any failures you can ask for more specifics.
 
 ```js
 var guardian = require('guardianjs');
