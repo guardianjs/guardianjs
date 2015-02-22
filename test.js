@@ -1,14 +1,28 @@
-var guardian = require('./guardian');
-var basicTests = require('./basicTests');
-var reportingTests = require('./reportingTests');
+#!/usr/bin/env node
 
-var results = basicTests(guardian);
+(function () {
+	'use strict';
 
-function getFailures(fails, test) {
-	return results[test] ? fails : fails + "\nFailure: " + test;
-}
+	function mergeResults(fails, results) {
+		return fails + Object.keys(results)
+			.reduce(function (fails, test) {
+				return results[test] ? fails : fails + "\nFailure: " + test;
+			}, '');
+	}
 
-var failures = Object.keys(results).reduce(getFailures, '');
-if (failures) throw new Error(failures);
+	function failureMessage() {
+		return Array.prototype.slice.call(arguments, 0)
+			.reduce(mergeResults, '');
+	}
 
-console.log('Tests executed on: ', new Date());
+	var guardian = require('./guardian');
+	var basicTests = require('./basicTests');
+	var reportingTests = require('./reportingTests');
+
+
+	var tests = [basicTests(guardian), reportingTests(guardian)];
+	var failures = failureMessage.apply(null, tests);
+	if (failures) throw new Error(failures);
+
+	console.log('Tests executed on: ', new Date());
+}());

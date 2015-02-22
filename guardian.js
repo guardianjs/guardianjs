@@ -1,10 +1,16 @@
-#!/usr/bin/env node
-
-'use strict';
+'use scrict';
 
 function Test() {}
 
+function reportReduce(report, test) {
+	return (test.pass ?
+		report.pass += 1 :
+		report.fail += 1) && report;
+}
+
 function guardian(tests) {
+	'use strict';
+
 	tests = tests || [];
 	return Object.create(Test.prototype, {
 		assert: {
@@ -16,6 +22,14 @@ function guardian(tests) {
 				});
 				tests.push(result);
 				return result;
+			}
+		},
+		report: {
+			value: function () {
+				return tests.reduce(reportReduce, {
+					pass: 0,
+					fail: 0
+				});
 			}
 		}
 	});
