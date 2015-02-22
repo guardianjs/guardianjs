@@ -1,33 +1,31 @@
 #!/usr/bin/env node
 
-(function () {
-	'use strict';
+'use strict';
 
-	function mergeResults(fails, results) {
-		return fails + Object.keys(results)
-			.reduce(function (r, test) {
-				return results[test] ? r : r + "\nFailure: " + test;
-			}, '');
-	}
+var guardian = require('./guardian');
+var fs = require('fs');
 
-	function failureMessage() {
-		return Array.prototype.slice.call(arguments, 0)
-			.reduce(mergeResults, '');
-	}
+function mergeResults(fails, results) {
+	return fails + Object.keys(results)
+		.reduce(function (r, test) {
+			return results[test] ? r : r + "\nFailure: " + test;
+		}, '');
+}
 
-	var guardian = require('./guardian');
-	var basicTests = require('./tests/basicTests');
-	var reportingTests = require('./tests/reportingTests');
-	var failureTests = require('./tests/failureTests');
+function failureMessage() {
+	return Array.prototype.slice.call(arguments, 0)
+		.reduce(mergeResults, '');
+}
 
-	var tests = [
-		basicTests(guardian),
-		reportingTests(guardian),
-		failureTests(guardian)
-	];
+(function executeTests() {
+	fs.readdir('tests', function (err, files) {
+		var tests = files.map(function (file) {
+			return require('./tests/' + file)(guardian);
+		});
 
-	var failures = failureMessage.apply(null, tests);
-	if (failures) throw new Error(failures);
+		var failures = failureMessage.apply(null, tests);
+		if (failures) throw new Error(failures);
 
-	console.log('Tests executed on: ', new Date());
+		console.log('Tests executed on: ', new Date());
+	});
 }());
