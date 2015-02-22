@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node test.js",
     "watch": "node watch.js",
-    "build": "uglify guardian.js | gzip -9f | wc -c"
+    "build": "browserify -g uglifyify guardian.js > bundle.js"
   },
   "author": {
     "name": "bryzaguy"
@@ -24,6 +24,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "browserify": "^9.0.3",
     "failing-code": "^0.1.0",
     "format-text": "0.0.3",
     "guardian-runner": "0.0.4",
@@ -32,6 +33,6 @@
     "jshint": "^2.6.0",
     "left-pad": "0.0.3",
     "style-format": "0.0.0",
-    "uglifyjs": "^2.3.6"
+    "uglifyify": "^3.0.1"
   }
 }

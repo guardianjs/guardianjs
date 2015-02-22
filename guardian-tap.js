@@ -4,9 +4,7 @@ var logTap;
 
 var testCount = 0;
 
-function Tap() {
-
-}
+function Tap() {}
 
 Tap.log = console.log;
 
