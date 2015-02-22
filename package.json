@@ -5,7 +5,7 @@
   "main": "guardian.js",
   "scripts": {
     "test": "node test.js",
-    "watch": "node ./node_modules/onchange './*.js' -- npm test"
+    "watch": "node watch.js"
   },
   "author": {
     "name": "bryzaguy"
