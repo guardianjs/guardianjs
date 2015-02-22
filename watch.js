@@ -1,5 +1,6 @@
-/* global require */
+#!/usr/bin/env node
+'use strict';
+
 (function () {
-	'use strict';
 	require('guardian-runner')();
 }());

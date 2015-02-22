@@ -22,7 +22,5 @@ module.exports = function (guardian) {
 	}
 
 	var failures = Object.keys(results).reduce(getFailures, '');
-	if (failures) {
-		throw new Error(failures);
-	}
+	if (failures) throw new Error(failures);
 };
