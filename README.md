@@ -12,33 +12,16 @@ $ npm install guardianjs
 
 ## Usage
 
-Ask guardian for a guard to keep watch over your code.  Tell them what things they need to assure remain truthy.  Ask them at any time for a full report.
+Ask guardian for a guard to keep watch over your code.  Tell them what things they need to assert remain truthy.  Ask them at any time for a full report.
 
 ```js
 var guardian = require('guardianjs');
 
 var guard = guardian();
 
-guard.assure(true);
-guard.assure(false);
+guard.assert(true);
+guard.assert(false);
 
 console.log(guard.report()); 
-// console output: { pass: 1, fail: 1, notes: [] }
-```
-
-Or give a duty to be performed in the event of failure.  Anything returned is added to the notes of their report.  This would be a great place to call console's error method.
-
-```js
-var guardian = require('guardianjs');
-
-var guard = guardian().duty(function(data) {
-	console.error(new Error('Fail!'));
-	return data.join(' ');
-});
-
-guard.assure(true);
-guard.assure(false, 'how could false fail!?', 5);
-
-console.log(guard.report()); 
-// console output: { pass: 1, fail: 1, notes: ['how could false fail!? 5'] }
+// console output: { pass: 1, fail: 1 }
 ```
