@@ -29,7 +29,7 @@ console.log(guard.failures());
 // console output: [{pass: false}] /* not super helpful yet */
 ```
 
-## Extending
+## Extend
 
 It is really simple to extend guardian.  In fact the failure output is not as interesting until you do.  For example: 
 
