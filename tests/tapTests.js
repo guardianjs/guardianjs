@@ -5,15 +5,18 @@ module.exports = function (guardian) {
 		result.push(msg);
 	};
 
-	var guard = guardian(),
-		test = guard.test('what a test', false),
-		test2 = guard.test('what again', true);
+	var tap = guardian().start(),
+		test = tap.test('what a test', false),
+		test2 = tap.test('what again', true);
+	tap.end();
 
 	return {
-		'test has name': test.name === 'what a test',
+		'test has a name': test.name === 'what a test',
 		'test has failed': test.pass === false,
 		'test begot test': test instanceof guardian.Guard,
-		'tap output fail': result[0] === "not ok 1 - what a test",
-		'tap output pass': result[1] === "ok 2 - what again"
+		'tap start works': result[0] === 'TAP version 13',
+		'tap output fail': result[1] === "not ok 1 - what a test",
+		'tap output pass': result[2] === "ok 2 - what again",
+		'tap output ends': result[3] === '1..2',
 	};
 };
