@@ -24,6 +24,13 @@ function guardian(tests) {
 				return result;
 			}
 		},
+		failures: {
+			value: function () {
+				return tests.filter(function (test) {
+					return !test.pass;
+				});
+			}
+		},
 		report: {
 			value: function () {
 				return tests.reduce(reportReduce, {
