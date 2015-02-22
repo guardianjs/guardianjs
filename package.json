@@ -5,7 +5,8 @@
   "main": "guardian.js",
   "scripts": {
     "test": "node test.js",
-    "watch": "node watch.js"
+    "watch": "node watch.js",
+    "build": "uglify guardian.js | gzip -9f | wc -c"
   },
   "author": {
     "name": "bryzaguy"
@@ -30,6 +31,7 @@
     "gulp-jshint": "^1.9.2",
     "jshint": "^2.6.0",
     "left-pad": "0.0.3",
-    "style-format": "0.0.0"
+    "style-format": "0.0.0",
+    "uglifyjs": "^2.3.6"
   }
 }
