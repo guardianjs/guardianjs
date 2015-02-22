@@ -2,7 +2,7 @@
   "name": "guardianjs",
   "version": "0.0.1",
   "description": "Unopinionated JavaScript testing micro-framework",
-  "main": "index.js",
+  "main": "guardian.js",
   "scripts": {
     "test": "node test.js",
     "watch": "node ./node_modules/onchange './*.js' -- npm test"
