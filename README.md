@@ -12,7 +12,7 @@ $ npm install guardianjs
 
 ## Usage
 
-Ask guardian for a guard to keep watch over your code.  Tell them what things they need to assert remain truthy.  Ask them at any time for a full report.
+Ask guardian for a guard to keep watch over your code.  Tell them what things they need to assert remain truthy.  Ask them at any time for a full report.  If there are any failures you can ask for more specifics.
 
 ```js
 var guardian = require('guardianjs');
@@ -24,4 +24,28 @@ guard.assert(false);
 
 console.log(guard.report()); 
 // console output: { pass: 1, fail: 1 }
+
+console.log(guard.failures()); 
+// console output: [{pass: false}] /* not super helpful yet */
+```
+
+## Extending
+
+It is really simple to extend guardian.  In fact the failure output is not as interesting until you extend. 
+
+```js
+var guardian = require('guardianjs'),
+	Guard = guardian.Guard;
+
+Guard.prototype.test = function(name) {
+	this.name = name;
+	return this;
+}
+
+var guard = guardian();
+
+guard.test("I'm a test").assert(false).assert(false);
+
+console.log(guard.failures()); 
+// console output: [{pass: false, name: "I'm a test"}, {pass: false, name: "I'm a test"}]
 ```

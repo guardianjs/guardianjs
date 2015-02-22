@@ -1,6 +1,6 @@
 'use scrict';
 
-function Test() {}
+function Guard() {}
 
 function reportReduce(report, test) {
 	return (test.pass ?
@@ -12,7 +12,7 @@ function guardian(tests) {
 	'use strict';
 
 	tests = tests || [];
-	return Object.create(Test.prototype, {
+	return Object.create(Guard.prototype, {
 		assert: {
 			value: function (pass) {
 				var result = Object.create(this, {
@@ -42,6 +42,6 @@ function guardian(tests) {
 	});
 }
 
-guardian.Test = Test;
+guardian.Guard = Guard;
 
 module.exports = guardian;
