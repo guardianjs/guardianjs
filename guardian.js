@@ -6,12 +6,24 @@ function reportReduce(report, test) {
 		report.fail += 1) && report;
 }
 
+function failures(tests) {
+	return tests.filter(function (test) {
+		return !test.pass;
+	});
+}
+
+function report(tests) {
+	return tests.reduce(reportReduce, {
+		pass: 0,
+		fail: 0
+	});
+}
+
 function guardian(tests) {
 	'use strict';
 
 	tests = tests || [];
-	var Guard = guardian.Guard;
-	var guard = Object.create(Guard.prototype, {
+	var guard = Object.create(guardian.Guard.prototype, {
 		assert: {
 			value: function (pass) {
 				var result = Object.create(this, {
@@ -24,26 +36,19 @@ function guardian(tests) {
 			}
 		},
 		failures: {
-			value: function () {
-				return tests.filter(function (test) {
-					return !test.pass;
-				});
-			}
+			value: failures.bind(null, tests)
 		},
 		report: {
-			value: function () {
-				return tests.reduce(reportReduce, {
-					pass: 0,
-					fail: 0
-				});
-			}
+			value: report.bind(null, tests)
 		}
 	});
 
-	Guard.call(guard);
+	guardian.Guard.call(guard);
 	return guard;
 }
 
 guardian.Guard = function () {};
+
+guardian.Tap = require('./guardian-tap');
 
 module.exports = guardian;
