@@ -1,8 +1,8 @@
 module.exports = function (guardian) {
 	'use strict';
 
-	var tests,
-		test = guardian(tests = []),
+	var tests = [],
+		test = guardian(tests),
 		passing = test.assert(true),
 		failing = test.assert(false);
 

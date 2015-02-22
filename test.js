@@ -1,12 +1,11 @@
 var guardian = require('./guardian');
 var basicTests = require('./basicTests');
-//var reportingTests = require('./reportingTests');
+var reportingTests = require('./reportingTests');
 
 var results = basicTests(guardian);
 
-
 function getFailures(fails, test) {
-	return results[test] ? fails : "Failure: " + fails + '\n' + test;
+	return results[test] ? fails : fails + "\nFailure: " + test;
 }
 
 var failures = Object.keys(results).reduce(getFailures, '');
