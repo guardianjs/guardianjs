@@ -16,9 +16,9 @@
 	}
 
 	var guardian = require('./guardian');
-	var basicTests = require('./basicTests');
-	var reportingTests = require('./reportingTests');
-	var failureTests = require('./failureTests');
+	var basicTests = require('./tests/basicTests');
+	var reportingTests = require('./tests/reportingTests');
+	var failureTests = require('./tests/failureTests');
 
 	var tests = [
 		basicTests(guardian),
