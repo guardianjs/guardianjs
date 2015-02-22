@@ -31,7 +31,7 @@ console.log(guard.failures());
 
 ## Extending
 
-It is really simple to extend guardian.  In fact the failure output is not as interesting until you extend. 
+It is really simple to extend guardian.  In fact the failure output is not as interesting until you do.  For example: 
 
 ```js
 var guardian = require('guardianjs'),
