@@ -43,7 +43,7 @@ var guard = guardian();
 var test = Object.create(guard);
 test.name = "I'm a test";
 test.assert = function(pass) {
-	this.assert(pass);
+	guard.assert(pass);
 	return this;
 };
 
