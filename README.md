@@ -37,14 +37,17 @@ It is really simple to extend guardian.  In fact the failure output is not as in
 var guardian = require('guardianjs'),
 	Guard = guardian.Guard;
 
-Guard.prototype.test = function(name) {
-	this.name = name;
-	return this;
-}
 
 var guard = guardian();
 
-guard.test("I'm a test").assert(false).assert(false);
+var test = Object.create(guard);
+test.name = "I'm a test";
+test.assert = function(pass) {
+	this.assert(pass);
+	return this;
+};
+
+guard.test().assert(false).assert(false);
 
 console.log(guard.failures()); 
 // console output: [{pass: false, name: "I'm a test"}, {pass: false, name: "I'm a test"}]
