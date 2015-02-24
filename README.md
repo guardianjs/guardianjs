@@ -42,12 +42,8 @@ var guard = guardian();
 
 var test = Object.create(guard);
 test.name = "I'm a test";
-test.assert = function(pass) {
-	guard.assert(pass);
-	return this;
-};
 
-guard.test().assert(false).assert(false);
+test.assert(false).assert(false);
 
 console.log(guard.failures()); 
 // console output: [{pass: false, name: "I'm a test"}, {pass: false, name: "I'm a test"}]
