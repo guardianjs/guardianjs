@@ -23,14 +23,11 @@ guard.assert(false);
 
 console.log(guard.report()); 
 // console output: { pass: 1, fail: 1 }
-
-console.log(guard.failures()); 
-// console output: [{pass: false}] /* not super helpful yet */
 ```
 
 ## Extend
 
-It is really simple to extend guardian.  In fact the failure output is not as interesting until you do.  For example: 
+It is really simple to extend guardian.  Properties added before calling assert are saved as metadata available when viewing failures.  For example: 
 
 ```js
 var guardian = require('guardianjs'),
