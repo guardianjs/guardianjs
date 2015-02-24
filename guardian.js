@@ -19,36 +19,39 @@ function report(tests) {
 	});
 }
 
-function guardian(tests) {
-	'use strict';
+function guardian(overrides) {
+	var o = overrides || {},
+		d = guardian.defaults(o.tests || []),
+		assert = o.assert || d.assert,
+		complete = o.complete || d.complete;
 
-	tests = tests || [];
-	var guard = Object.create(guardian.Guard.prototype, {
-		assert: {
-			value: function (pass) {
-				var result = Object.create(this, {
-					pass: {
-						value: pass
-					}
-				});
-				tests.push(result);
-				return result;
-			}
+	var guard = Object.create({
+		assert: function(pass) {
+			var result = assert.bind(this)(pass);
+			complete.bind(this)(result);
+			return result;
 		},
-		failures: {
-			value: failures.bind(null, tests)
-		},
-		report: {
-			value: report.bind(null, tests)
-		}
+		failures: failures.bind(this, d.tests),
+		report: report.bind(this, d.tests)
 	});
 
-	guardian.Guard.call(guard);
 	return guard;
 }
 
-guardian.Guard = function () {};
-
-guardian.Tap = require('./guardian-tap');
+guardian.defaults = function (tests) {
+	return {
+		tests: tests,
+		complete: function (result) {
+				tests.push(result);
+			},
+		assert: function (pass) {
+			return Object.create(this, {
+				pass: {
+					value: pass
+				}
+			});
+		}
+	};
+};
 
 module.exports = guardian;

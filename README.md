@@ -53,18 +53,4 @@ console.log(guard.failures());
 
 ### Tap Tests
 
-```js
-var guardian = require('guardianjs'),
-guardian.Guard = guardian.Tap;
-
-// default logging is: guardian.Tap.log = console.log; 
-
-var tap = guardian();
-
-tap.start(); // console.log('TAP version 13');
-
-tap.test("passing", true);  // console.log('ok 1 - passing')
-tap.test("failing", false); // console.log('not ok 2 - failing')
-
-tap.end(); // console.log('1..2');
-```
+coming...
