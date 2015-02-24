@@ -9,6 +9,13 @@ function reportReduce(report, test) {
 function failures(tests) {
 	return tests.filter(function (test) {
 		return !test.pass;
+	}).map(function (test) {
+		var r = {};
+		for (var k in test) {
+			if (typeof test[k] !== 'function')
+			r[k] = test[k];
+		}
+		return r;
 	});
 }
 
@@ -47,7 +54,8 @@ guardian.defaults = function (tests) {
 		assert: function (pass) {
 			return Object.create(this, {
 				pass: {
-					value: pass
+					value: pass,
+					enumerable: true
 				}
 			});
 		}
