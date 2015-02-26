@@ -1,7 +1,0 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";function Tap(){}var logTap,testCount=0;Tap.log=console.log,Tap.prototype.test=function(t,o){return testCount++,Tap.log((o?"ok ":"not ok ")+testCount+" - "+t),Object.create(this,{name:{value:t}}).assert(o)},Tap.prototype.start=function(){return Tap.log("TAP version 13"),this},Tap.prototype.end=function(){Tap.log("1.."+testCount)},module.exports=Tap;
-
-
-},{}],2:[function(require,module,exports){
-"use scrict";function reportReduce(r,u){return(u.pass?r.pass+=1:r.fail+=1)&&r}function failures(r){return r.filter(function(r){return!r.pass})}function report(r){return r.reduce(reportReduce,{pass:0,fail:0})}function guardian(r){"use strict";r=r||[];var u=Object.create(guardian.Guard.prototype,{assert:{value:function(u){var a=Object.create(this,{pass:{value:u}});return r.push(a),a}},failures:{value:failures.bind(null,r)},report:{value:report.bind(null,r)}});return guardian.Guard.call(u),u}guardian.Guard=function(){},guardian.Tap=require("./guardian-tap"),module.exports=guardian;
-},{"./guardian-tap":1}]},{},[2]);

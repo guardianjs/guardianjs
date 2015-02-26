@@ -2,10 +2,13 @@ module.exports = function (guardian) {
 	'use strict';
 
 	var tests = [],
-		test = guardian({
+		test = Object.create(guardian({
 			tests: tests
+		}), {
+			name: {
+				value: "I'm a test"
+			}
 		}),
-		r = (test.name = "I'm a test"),
 		passing = test.assert(true),
 		failing = test.assert(false);
 

@@ -18,7 +18,6 @@ function failures(tests) {
 		return r;
 	});
 }
-
 function report(tests) {
 	return tests.reduce(reportReduce, {
 		pass: 0,
@@ -32,15 +31,15 @@ function guardian(overrides) {
 		assert = o.assert || d.assert,
 		complete = o.complete || d.complete;
 
-	var guard = Object.create({
-		assert: function(pass) {
+	var guard = Object.freeze(Object.create({
+		assert: function (pass) {
 			var result = assert.bind(this)(pass);
 			complete.bind(this)(result);
 			return result;
 		},
-		failures: failures.bind(this, d.tests),
-		report: report.bind(this, d.tests)
-	});
+		failures: failures.bind(null, d.tests),
+		report: report.bind(null, d.tests)
+	}));
 
 	return guard;
 }
@@ -52,12 +51,12 @@ guardian.defaults = function (tests) {
 				tests.push(result);
 			},
 		assert: function (pass) {
-			return Object.create(this, {
+			return Object.freeze(Object.create(this, {
 				pass: {
 					value: pass,
 					enumerable: true
 				}
-			});
+			}));
 		}
 	};
 };
