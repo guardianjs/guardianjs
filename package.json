@@ -1,6 +1,6 @@
 {
   "name": "guardianjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Unopinionated JavaScript testing micro-framework",
   "main": "guardian.js",
   "scripts": {
