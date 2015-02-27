@@ -27,7 +27,7 @@
     "browserify": "^9.0.3",
     "failing-code": "^0.1.0",
     "format-text": "0.0.3",
-    "guardian-runner": "0.0.4",
+    "guardian-runner": "0.0.5",
     "gulp": "^3.8.10",
     "gulp-jshint": "^1.9.2",
     "jshint": "^2.6.0",
