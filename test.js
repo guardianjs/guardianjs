@@ -27,6 +27,7 @@ function failureMessage() {
 		var failures = failureMessage.apply(null, tests);
 		if (failures) throw new Error(failures);
 
-		console.log('Tests executed in', (new Date() - start) / 1000,'seconds');
+		var end = (new Date() - start) / 1000;
+		console.log('Tests executed in', end,'seconds');
 	});
 }());
