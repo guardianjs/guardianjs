@@ -18,6 +18,7 @@ function failures(tests) {
 		return r;
 	});
 }
+
 function report(tests) {
 	return tests.reduce(reportReduce, {
 		pass: 0,

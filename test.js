@@ -2,8 +2,8 @@
 
 'use strict';
 
-var guardian = require('./guardian');
-var fs = require('fs');
+var guardian = require('./guardian'),
+	fs = require('fs');
 
 function mergeResults(fails, results) {
 	return fails + Object.keys(results)
@@ -18,6 +18,7 @@ function failureMessage() {
 }
 
 (function executeTests() {
+	var start = new Date();
 	fs.readdir('tests', function (err, files) {
 		var tests = files.map(function (file) {
 			return require('./tests/' + file)(guardian);
@@ -26,6 +27,6 @@ function failureMessage() {
 		var failures = failureMessage.apply(null, tests);
 		if (failures) throw new Error(failures);
 
-		console.log('Tests executed on: ', new Date());
+		console.log('Tests executed in', (new Date() - start) / 1000,'seconds');
 	});
 }());
