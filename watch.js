@@ -3,5 +3,5 @@
 'use strict';
 
 (function () {
-	require('guardian-runner')('test.js', ['*.js', '**/*.js']);
+	require('guardian-runner')();
 }());
