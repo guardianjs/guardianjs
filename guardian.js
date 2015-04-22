@@ -1,4 +1,4 @@
-'use scrict';
+'use strict';
 
 function reportReduce(report, test) {
   return (test.pass ?

@@ -25,6 +25,12 @@ console.log(guard.report());
 // console output: { pass: 1, fail: 1 }
 ```
 
+## Watch
+
+Want your tests to run automatically when files get updated?
+
+Try https://github.com/guardianjs/guardian-runner
+
 ## Extend
 
 It is really simple to extend guardian.  Properties added before calling assert are saved as metadata available when viewing failures.  For example: 
