@@ -4,8 +4,8 @@
   "description": "Unopinionated JavaScript testing micro-framework",
   "main": "guardian.js",
   "scripts": {
-    "test": "node test.js",
-    "watch": "node watch.js",
+    "test": "clear && node test.js",
+    "watch": "chokidar '**/*.js' '!node_modules/**/*.js' -c 'npm test'",
     "build": "browserify -g uglifyify guardian.js > bundle.js"
   },
   "author": {
@@ -25,14 +25,9 @@
   "license": "MIT",
   "devDependencies": {
     "browserify": "^9.0.3",
-    "failing-code": "^0.1.0",
-    "format-text": "0.0.3",
-    "guardian-runner": "0.0.5",
-    "gulp": "^3.8.10",
-    "gulp-jshint": "^1.9.2",
+    "cli-color": "^0.3.3",
     "jshint": "^2.6.0",
-    "left-pad": "0.0.3",
-    "style-format": "0.0.0",
+    "observatory": "^0.1.1",
     "uglifyify": "^3.0.1"
   }
 }
